@@ -3,6 +3,35 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/nf-core/demo/releases/tag/1.1.0) - 2026-01-26
+
+### Credits
+
+Special thanks to the following for their reviews and assistance:
+
+- [Phil Ewels](https://github.com/ewels)
+- [Matthias Hörtenhuber](https://github.com/mashehu)
+- [Maxime Garcia](https://github.com/maxulysse)
+
+### Changed
+
+- [#49](https://github.com/nf-core/demo/pull/49) - Template update for nf-core/tools v3.4.1 and v3.5.1
+- Updated nf-core modules and subworkflows
+- Bump nf-schema and minimum Nextflow version
+- Use topic channels for version handling
+- Update pipeline to meet requirements for Nextflow's "strict syntax"
+- Add mimetype to schema for `params.input`
+
+### Fixed
+
+- Fix all warnings from `nextflow lint`
+
+### Dependencies
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `multiqc`  | 1.25.1      | 1.33        |
+
 ## 1.0.2
 
 ### Credits
