@@ -8,7 +8,6 @@ include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_demo_pipeline'
 
 /*
@@ -23,7 +22,9 @@ workflow DEMO {
     ch_samplesheet // channel: samplesheet read in from --input
     main:
 
-    ch_versions = Channel.empty()
+    // Collect software versions from topic channel
+    ch_versions = Channel.topic('versions')
+        .map { process, tool, version -> "${process}:\n    ${tool}: ${version}" }
     ch_multiqc_files = Channel.empty()
     //
     // MODULE: Run FASTQC
@@ -32,7 +33,6 @@ workflow DEMO {
         ch_samplesheet
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
     // MODULE: Run SEQTK_TRIM
@@ -42,13 +42,16 @@ workflow DEMO {
             ch_samplesheet
         )
         ch_trimmed  = SEQTK_TRIM.out.reads
-        ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
     }
 
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    ch_versions
+        .unique()
+        .mix(Channel.of(
+            "Workflow:\n    ${workflow.manifest.name}: ${workflow.manifest.version}\n    Nextflow: ${workflow.nextflow.version}"
+        ))
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name: 'nf_core_'  +  'demo_software_'  + 'mqc_'  + 'versions.yml',
