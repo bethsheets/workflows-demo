@@ -29,10 +29,10 @@ Special thanks to the following for their reviews and assistance:
 
 ### Dependencies
 
-| Dependency  | Old version  | New version    |
-| ----------- | ------------ | -------------- |
-| `multiqc`   | 1.25.1       | 1.33           |
-| `nextflow`  | 24.04.2      | 25.10.0        |
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `multiqc`  | 1.25.1      | 1.33        |
+| `nextflow` | 24.04.2     | 25.10.0     |
 
 ## 1.0.2
 
