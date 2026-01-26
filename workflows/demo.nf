@@ -32,7 +32,6 @@ workflow DEMO {
         ch_samplesheet
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
     // MODULE: Run SEQTK_TRIM
@@ -42,7 +41,6 @@ workflow DEMO {
             ch_samplesheet
         )
         ch_trimmed  = SEQTK_TRIM.out.reads
-        ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
     }
 
     //
