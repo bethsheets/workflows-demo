@@ -19,7 +19,6 @@ Special thanks to the following for their reviews and assistance:
 - Updated nf-core modules and subworkflows
 - Bump nf-schema and minimum Nextflow version
 - Use topic channels for version handling
-- Updated
 - Update pipeline to meet requirements for Nextflow's "strict syntax"
 - Add mimetype to schema for `params.input`
 
