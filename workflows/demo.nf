@@ -31,7 +31,7 @@ workflow DEMO {
     FASTQC (
         ch_samplesheet
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
+    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{ _meta, zip -> zip })
 
     //
     // MODULE: Run SEQTK_TRIM
@@ -40,13 +40,12 @@ workflow DEMO {
         SEQTK_TRIM (
             ch_samplesheet
         )
-        ch_trimmed  = SEQTK_TRIM.out.reads
     }
 
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
