@@ -15,7 +15,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { DEMO  } from './workflows/demo'
+include { DEMO  } from './workflows-demo'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_demo_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_demo_pipeline'
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_demo_pipeline'
